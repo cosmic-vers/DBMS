@@ -1,0 +1,48 @@
+CREATE TABLE students (
+    student_id NUMBER,
+    student_name VARCHAR2(50),
+    course VARCHAR2(50),
+    marks NUMBER
+);
+insert into students values(101,'anoop','btech',93);
+insert into students values(102,'kiran','btech',90);
+insert into students values(103,'sneha','btech',95);
+
+set serveroutput on
+DECLARE
+    -- Declare cursor
+    CURSOR student_cursor IS
+        SELECT student_id, student_name, course, marks
+        FROM students;
+
+    -- Declare variables to store fetched data
+    v_id      students.student_id%TYPE;
+    v_name    students.student_name%TYPE;
+    v_course  students.course%TYPE;
+    v_marks   students.marks%TYPE;
+
+BEGIN
+    -- Open cursor
+    OPEN student_cursor;
+
+    LOOP
+        -- Fetch records into variables
+        FETCH student_cursor
+        INTO v_id, v_name, v_course, v_marks;
+
+        -- Exit when no more records
+        EXIT WHEN student_cursor%NOTFOUND;
+
+        -- Display student details
+        DBMS_OUTPUT.PUT_LINE(
+            'ID: ' || v_id ||
+            ', Name: ' || v_name ||
+            ', Course: ' || v_course ||
+            ', Marks: ' || v_marks
+        );
+    END LOOP;
+
+    -- Close cursor
+    CLOSE student_cursor;
+END;
+/
