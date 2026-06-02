@@ -17,3 +17,16 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Maximum number is: ' || max_num);
 END;
 /
+
+
+or 
+
+DECLARE
+    a NUMBER := 10;
+    b NUMBER := 25;
+    c NUMBER := 15;
+    max_num NUMBER;
+BEGIN
+    max_num := GREATEST(a, b, c);
+    DBMS_OUTPUT.PUT_LINE('Maximum number is: ' || max_num);
+END; /
